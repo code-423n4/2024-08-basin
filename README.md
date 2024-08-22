@@ -115,7 +115,7 @@ An example factory implementation is provided in [{Aquifer}](/src/Aquifer.sol) w
 
 *See [scope.txt](https://github.com/code-423n4/2024-08-basin/blob/main/scope.txt)*
 
-This [commit](https://github.com/BeanstalkFarms/Basin/pull/143/commits/071cc41fbf1d9a40658c0337f2f642e19f942a7c) includes the fixes for the [preceding audit](https://github.com/code-423n4/2024-07-basin-findings).
+🛑 All of the contracts below were audited in [Basin's July audit](https://github.com/code-423n4/2024-07-basin).  Here is a [commit](https://github.com/BeanstalkFarms/Basin/pull/143/commits/071cc41fbf1d9a40658c0337f2f642e19f942a7c) highlighting the changes.
 
 ### Files in scope
 
