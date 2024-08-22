@@ -251,43 +251,20 @@ An example factory implementation is provided in [{Aquifer}](/src/Aquifer.sol) w
 | ./test/pumps/PumpHelpers.sol |
 | Totals: 117 |
 
+
+
 ## Scoping Q &amp; A
 
 ### General questions
-### Are there any ERC20's in scope?: Yes
 
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-Any (all possible ERC20s)
-
-
-### Are there any ERC777's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-
-
-### Are there any ERC721's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-
-
-### Are there any ERC1155's in scope?: No
-
-✅ SCOUTS: If the answer above 👆 is "Yes", please add the tokens below 👇 to the table. Otherwise, update the column with "None".
-
-
-
-✅ SCOUTS: Once done populating the table below, please remove all the Q/A data above.
 
 | Question                                | Answer                       |
 | --------------------------------------- | ---------------------------- |
-| ERC20 used by the protocol              |       🖊️             |
-| Test coverage                           | ✅ SCOUTS: Please populate this after running the test coverage command                          |
-| ERC721 used  by the protocol            |            🖊️              |
-| ERC777 used by the protocol             |           🖊️                |
-| ERC1155 used by the protocol            |              🖊️            |
+| ERC20 used by the protocol              |       Any (all possible ERC20s)             |
+| Test coverage                           | Lines: 82.29% - Functions: 82.39%                           |
+| ERC721 used  by the protocol            |            None              |
+| ERC777 used by the protocol             |           None                |
+| ERC1155 used by the protocol            |              None            |
 | Chains the protocol will be deployed on | Ethereum |
 
 ### ERC20 token behaviors in scope
@@ -323,73 +300,97 @@ Any (all possible ERC20s)
 
 
 ### EIP compliance checklist
-`src/WellUpgradeable.sol`: should comply with EIP-1822
-
-✅ SCOUTS: Please format the response above 👆 using the template below👇
-
-| Question                                | Answer                       |
-| --------------------------------------- | ---------------------------- |
-| src/Token.sol                           | ERC20, ERC721                |
-| src/NFT.sol                             | ERC721                       |
+- `src/WellUpgradeable.sol`: should comply with EIP-1822
 
 
 # Additional context
 
 ## Main invariants
 
-None
+- None
 
 ## Attack ideas (where to focus for bugs)
-None
+- None
 
 ## All trusted roles in the protocol
 
-N/A
+- N/A
+
 
 ## Describe any novel or unique curve logic or mathematical models implemented in the contracts:
 
-With regard to the Stable 2 Well Function, a lookup table is used to assist the Newtonian estimation to decrease the computation needed to converge to an answer. See in line comments.
+- With regard to the Stable 2 Well Function, a lookup table is used to assist the Newtonian estimation to decrease the computation needed to converge to an answer. See inline comments.
 
 ## Running tests
 
-# foundry setup
-
+Setup the repo and requirements:
+```bash
+git clone https://github.com/code-423n4/2024-08-basin.git
+cd 2024-07-basin
+git submodule update --init --recursive
 foundryup
 forge install
-forge build
-
-# setup python environment
-
+```
+Setup Python environment and perform the tests (Make sure your `MAINNET_RPC_URL` is set in `.env` file):
+```bash
 python3 -m venv env 
 source env/bin/activate 
 python3 -m pip install -r requirements.txt
-
-# gas report
-
-forge test --ffi --gas-report
-
-✅ SCOUTS: Please format the response above 👆 using the template below👇
-
-```bash
-git clone https://github.com/code-423n4/2023-08-arbitrum
-git submodule update --init --recursive
-cd governance
-foundryup
-make install
-make build
-make sc-election-test
+forge test --ffi
 ```
-To run code coverage
+To run code coverage:
 ```bash
-make coverage
+forge  coverage --ffi
 ```
-To run gas benchmarks
-```bash
-make gas
-```
-
-✅ SCOUTS: Add a screenshot of your terminal showing the gas report
-✅ SCOUTS: Add a screenshot of your terminal showing the test coverage
+| File                                                            | % Lines            | % Statements       | % Branches        | % Funcs          |
+|-----------------------------------------------------------------|--------------------|--------------------|-------------------|------------------|
+| mocks/functions/MockEmptyFunction.sol                           | 66.67% (2/3)       | 66.67% (2/3)       | 100.00% (0/0)     | 80.00% (4/5)     |
+| mocks/functions/MockFunctionBad.sol                             | 33.33% (1/3)       | 25.00% (1/4)       | 100.00% (0/0)     | 60.00% (3/5)     |
+| mocks/pumps/MockFailPump.sol                                    | 100.00% (1/1)      | 100.00% (1/1)      | 100.00% (0/0)     | 100.00% (1/1)    |
+| mocks/pumps/MockPump.sol                                        | 50.00% (1/2)       | 50.00% (1/2)       | 100.00% (0/0)     | 50.00% (1/2)     |
+| mocks/tokens/MockToken.sol                                      | 83.33% (5/6)       | 83.33% (5/6)       | 100.00% (0/0)     | 80.00% (4/5)     |
+| mocks/tokens/MockTokenFeeOnTransfer.sol                         | 81.25% (13/16)     | 86.36% (19/22)     | 100.00% (0/0)     | 66.67% (6/9)     |
+| mocks/tokens/ReentrantMockToken.sol                             | 100.00% (7/7)      | 88.89% (8/9)       | 66.67% (2/3)      | 100.00% (3/3)    |
+| mocks/wells/MockInitFailWell.sol                                | 100.00% (2/2)      | 100.00% (2/2)      | 100.00% (0/0)     | 100.00% (2/2)    |
+| mocks/wells/MockReserveWell.sol                                 | 100.00% (7/7)      | 100.00% (7/7)      | 100.00% (0/0)     | 100.00% (6/6)    |
+| mocks/wells/MockStaticWell.sol                                  | 100.00% (31/31)    | 100.00% (40/40)    | 50.00% (2/4)      | 100.00% (10/10)  |
+| mocks/wells/MockWellUpgradeable.sol                             | 100.00% (1/1)      | 100.00% (1/1)      | 100.00% (0/0)     | 100.00% (1/1)    |
+| script/deploy/Aquifer.s.sol                                     | 0.00% (0/3)        | 0.00% (0/4)        | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/deploy/AquiferWell.s.sol                                 | 0.00% (0/17)       | 0.00% (0/23)       | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/deploy/MockPump.s.sol                                    | 0.00% (0/5)        | 0.00% (0/7)        | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/deploy/Well.s.sol                                        | 0.00% (0/17)       | 0.00% (0/23)       | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/deploy/helpers/Logger.sol                                | 0.00% (0/8)        | 0.00% (0/8)        | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/helpers/WellDeployer.sol                                 | 100.00% (6/6)      | 100.00% (6/6)      | 100.00% (0/0)     | 100.00% (2/2)    |
+| script/simulations/stableswap/StableswapCalcRatiosLiqSim.s.sol  | 0.00% (0/43)       | 0.00% (0/55)       | 100.00% (0/0)     | 0.00% (0/1)      |
+| script/simulations/stableswap/StableswapCalcRatiosSwapSim.s.sol | 0.00% (0/57)       | 0.00% (0/75)       | 100.00% (0/0)     | 0.00% (0/1)      |
+| src/Aquifer.sol                                                 | 100.00% (27/27)    | 100.00% (30/30)    | 100.00% (14/14)   | 100.00% (3/3)    |
+| src/Well.sol                                                    | 99.22% (254/256)   | 98.90% (361/365)   | 100.00% (26/26)   | 97.96% (48/49)   |
+| src/WellUpgradeable.sol                                         | 88.24% (30/34)     | 90.20% (46/51)     | 56.25% (9/16)     | 80.00% (8/10)    |
+| src/functions/ConstantProduct.sol                               | 77.27% (17/22)     | 70.59% (24/34)     | 66.67% (2/3)      | 75.00% (6/8)     |
+| src/functions/ConstantProduct2.sol                              | 100.00% (12/12)    | 100.00% (16/16)    | 100.00% (1/1)     | 100.00% (7/7)    |
+| src/functions/ProportionalLPToken.sol                           | 0.00% (0/3)        | 0.00% (0/5)        | 100.00% (0/0)     | 0.00% (0/1)      |
+| src/functions/ProportionalLPToken2.sol                          | 100.00% (3/3)      | 100.00% (3/3)      | 100.00% (0/0)     | 100.00% (1/1)    |
+| src/functions/Stable2.sol                                       | 93.08% (121/130)   | 93.94% (186/198)   | 80.00% (24/30)    | 92.86% (13/14)   |
+| src/functions/StableLUT/Stable2LUT1.sol                         | 96.07% (391/407)   | 96.07% (391/407)   | 94.55% (382/404)  | 100.00% (3/3)    |
+| src/libraries/ABDKMathQuad.sol                                  | 73.59% (772/1049)  | 75.13% (1142/1520) | 59.00% (331/561)  | 46.88% (15/32)   |
+| src/libraries/LibBytes.sol                                      | 100.00% (26/26)    | 100.00% (33/33)    | 100.00% (16/16)   | 100.00% (2/2)    |
+| src/libraries/LibBytes16.sol                                    | 100.00% (21/21)    | 100.00% (28/28)    | 100.00% (6/6)     | 100.00% (2/2)    |
+| src/libraries/LibClone.sol                                      | 88.66% (86/97)     | 88.89% (88/99)     | 0.00% (0/5)       | 90.00% (9/10)    |
+| src/libraries/LibContractInfo.sol                               | 66.67% (8/12)      | 61.54% (8/13)      | 50.00% (2/4)      | 66.67% (2/3)     |
+| src/libraries/LibLastReserveBytes.sol                           | 97.56% (40/41)     | 98.15% (53/54)     | 100.00% (7/7)     | 75.00% (3/4)     |
+| src/libraries/LibMath.sol                                       | 98.53% (67/68)     | 98.70% (76/77)     | 80.00% (8/10)     | 100.00% (4/4)    |
+| src/libraries/LibWellConstructor.sol                            | 92.86% (13/14)     | 94.74% (18/19)     | 100.00% (0/0)     | 75.00% (3/4)     |
+| src/libraries/LibWellUpgradeableConstructor.sol                 | 92.86% (13/14)     | 94.74% (18/19)     | 100.00% (0/0)     | 75.00% (3/4)     |
+| src/pumps/MultiFlowPump.sol                                     | 96.43% (189/196)   | 96.34% (263/273)   | 88.89% (24/27)    | 100.00% (21/21)  |
+| src/utils/Clone.sol                                             | 41.67% (5/12)      | 38.89% (7/18)      | 100.00% (0/0)     | 50.00% (3/6)     |
+| src/utils/ClonePlus.sol                                         | 100.00% (7/7)      | 100.00% (11/11)    | 100.00% (0/0)     | 100.00% (2/2)    |
+| test/LiquidityHelper.sol                                        | 63.16% (24/38)     | 67.80% (40/59)     | 100.00% (0/0)     | 57.14% (4/7)     |
+| test/SwapHelper.sol                                             | 92.31% (24/26)     | 94.12% (32/34)     | 100.00% (0/0)     | 66.67% (2/3)     |
+| test/TestHelper.sol                                             | 89.29% (150/168)   | 90.22% (203/225)   | 80.00% (8/10)     | 86.96% (40/46)   |
+| test/helpers/Users.sol                                          | 81.82% (9/11)      | 81.25% (13/16)     | 100.00% (0/0)     | 66.67% (2/3)     |
+| test/integration/IntegrationTestHelper.sol                      | 90.32% (28/31)     | 92.68% (38/41)     | 50.00% (1/2)      | 100.00% (6/6)    |
+| test/invariant/Handler.t.sol                                    | 90.73% (235/259)   | 90.80% (316/348)   | 93.75% (15/16)    | 95.45% (21/22)   |
+| Total                                                           | 82.29% (2649/3219) | 82.37% (3537/4294) | 75.54% (880/1165) | 82.39% (276/335) |
 
 ## Miscellaneous
 Employees of Beanstalk Farms contributors and employees' family members are ineligible to participate in this audit.
