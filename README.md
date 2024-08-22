@@ -300,7 +300,7 @@ An example factory implementation is provided in [{Aquifer}](/src/Aquifer.sol) w
 
 
 ### EIP compliance checklist
-- `src/WellUpgradeable.sol`: should comply with EIP-1822
+- None
 
 
 # Additional context
