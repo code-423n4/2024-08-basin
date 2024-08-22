@@ -13,9 +13,9 @@
 This audit repo and its Discord channel are accessible to **certified wardens only.** Participation in private audits is bound by:
 
 1. Code4rena's [Certified Contributor Terms and Conditions](https://github.com/code-423n4/code423n4.com/blob/main/_data/pages/certified-contributor-terms-and-conditions.md)
-2. C4's [Certified Contributor Code of Professional Conduct](https://code4rena.notion.site/Code-of-Professional-Conduct-657c7d80d34045f19eee510ae06fef55)
+2. Code4rena's [Certified Contributor Code of Professional Conduct](https://code4rena.notion.site/Code-of-Professional-Conduct-657c7d80d34045f19eee510ae06fef55)
 
-*All discussions regarding private audits should be considered private and confidential, unless otherwise indicated.*
+*All discussions regarding private audits should be considered private and confidential unless otherwise indicated.*
 
 ## Automated Findings / Publicly Known Issues
 
@@ -26,7 +26,7 @@ All findings in the following audit reports:
 * 06/16/23: [Basin Halborn Report](https://arweave.net/1IKi4iqRvu3qu_GdcLY4f3u9PgvOMvuRltU7AIXAEyA) @ [e5441fc](https://github.com/BeanstalkFarms/Basin/tree/e5441fc78f0fd4b77a898812d0fd22cb43a0af55)
 * 06/16/23: [Basin Cyfrin Report](https://arweave.net/usT3ClfjHwpX32OXnh5De1aH79csX1PMoXJCghXBaps) @ [e5441fc](https://github.com/BeanstalkFarms/Basin/tree/e5441fc78f0fd4b77a898812d0fd22cb43a0af55)
 * 10/05/23: [Basin Code4rena Report](https://code4rena.com/reports/2023-07-basin) @ [7e51c02](https://github.com/code-423n4/2023-07-basin/tree/7e51c025d32aff3f2456842c83cda66cda274d11)
-* All bug reports from the Immunefi program listed [here](https://community.bean.money/bug-reports).
+* All bug reports from the Immunefi program are listed [here](https://community.bean.money/bug-reports).
 
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
 
@@ -68,7 +68,7 @@ A [{Well}](/src/Well.sol) is a constant function AMM that allows the provisionin
 Each Well is defined by its Tokens, Well function, and Pump.
 - The **Tokens** define the set of ERC-20 tokens that can be exchanged in the Well.
 - The **Well function** defines an invariant relationship between the Well's reserves and the supply of LP tokens. See [{IWellFunction}](/src//interfaces/IWellFunction.sol).
-- **Pumps** are an on-chain oracles that are updated upon each interaction with the Well. See [{IPump}](/src/interfaces/IPump.sol).
+- **Pumps** are on-chain oracles that are updated upon each interaction with the Well. See [{IPump}](/src/interfaces/IPump.sol).
 
 A Well's tokens, Well function, and Pump are stored as immutable variables during Well construction to prevent unnecessary SLOAD calls during operation.
 
